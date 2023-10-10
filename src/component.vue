@@ -41,7 +41,9 @@ const loadNotice = () => {
 	abortController.value.abort()
 	abortController.value = new AbortController()
 
-	const { pageId, ...params } = props
+	const { pageId, ...params } = props as Record<string, any>
+
+	params['integration'] = 'vue-npm'
 
 	NTCBrowser.queryDocument(pageId, params, { signal: abortController.value.signal }).then((res) => {
 		if (!res.ok) return
