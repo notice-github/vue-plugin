@@ -45,6 +45,10 @@ const loadNotice = () => {
 
 	params['integration'] = 'vue-npm'
 
+	for (let key in params) {
+		if (!params[key]) delete params[key]
+	}
+
 	NTCBrowser.queryDocument(pageId, params, { signal: abortController.value.signal }).then((res) => {
 		if (!res.ok) return
 		body.value = res.data
